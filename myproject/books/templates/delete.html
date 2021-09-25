@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+  <h1>Is the book bought ?</h1>
+  <p>Fill out the form to remove the book from the list.</p>
+  <form method="POST">
+      {{ form.hidden_tag() }}
+      {{ form.isbn.label }} {{ form.isbn() }}
+      {{ form.submit() }}
+  </form>
+</div>
+{% endblock %}
