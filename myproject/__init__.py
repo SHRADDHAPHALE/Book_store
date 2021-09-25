@@ -16,4 +16,4 @@ Migrate(app,db)
 
 from myproject.books.views import books_blueprint
 
-app.register_blueprint(books_blueprint,url_prefix='/puppies')
+app.register_blueprint(books_blueprint,url_prefix='/books')

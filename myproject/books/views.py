@@ -3,7 +3,7 @@ from myproject import db
 from myproject.books.forms import AddForm,DelForm
 from myproject.models import Book
 
-books_blueprint = Blueprint('books',__name__,template_folder='templates')
+books_blueprint = Blueprint('books',__name__,template_folder='templates/books')
 
 @books_blueprint.route('/add', methods=['GET', 'POST'])
 def add():
@@ -16,7 +16,7 @@ def add():
         db.session.add(new_book)
         db.session.commit()
 
-        return redirect(url_for('list'))
+        return redirect(url_for('books.list'))
 
     return render_template('add.html',form=form)
 
@@ -36,5 +36,5 @@ def delete():
         db.session.delete(book)
         db.session.commit()
 
-        return redirect(url_for('list'))
+        return redirect(url_for('books.list'))
     return render_template('delete.html',form=form)
