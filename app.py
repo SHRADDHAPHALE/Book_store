@@ -1,4 +1,4 @@
-from myproject import app
+from bookstore import app
 from flask import render_template
 
 
