@@ -1,11 +1,12 @@
-from flask import Blueprint,render_template,redirect,url_for
+from flask import Blueprint, render_template, redirect, url_for
 from bookstore import db
-from bookstore.books.forms import AddForm,DelForm
+from bookstore.books.forms import AddForm, DelForm
 from bookstore.models import Book
 
-books_blueprint = Blueprint('books',__name__,template_folder='templates/books')
+books_blueprint = Blueprint("books", __name__, template_folder="templates/books")
 
-@books_blueprint.route('/add', methods=['GET', 'POST'])
+
+@books_blueprint.route("/add", methods=["GET", "POST"])
 def add():
     form = AddForm()
 
@@ -16,16 +17,18 @@ def add():
         db.session.add(new_book)
         db.session.commit()
 
-        return redirect(url_for('books.list'))
+        return redirect(url_for("books.list"))
 
-    return render_template('add.html',form=form)
+    return render_template("add.html", form=form)
 
-@books_blueprint.route('/list')
+
+@books_blueprint.route("/list")
 def list():
     books = Book.query.all()
-    return render_template('list.html', books=books)
+    return render_template("list.html", books=books)
 
-@books_blueprint.route('/delete', methods=['GET', 'POST'])
+
+@books_blueprint.route("/delete", methods=["GET", "POST"])
 def delete():
 
     form = DelForm()
@@ -36,5 +39,5 @@ def delete():
         db.session.delete(book)
         db.session.commit()
 
-        return redirect(url_for('books.list'))
-    return render_template('delete.html',form=form)
+        return redirect(url_for("books.list"))
+    return render_template("delete.html", form=form)

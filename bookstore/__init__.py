@@ -6,14 +6,16 @@ from flask_migrate import Migrate
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'mysecretkey'
+app.config["SECRET_KEY"] = "mysecretkey"
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
+    basedir, "data.sqlite"
+)
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
-Migrate(app,db)
+Migrate(app, db)
 
 from bookstore.books.views import books_blueprint
 
-app.register_blueprint(books_blueprint,url_prefix='/books')
+app.register_blueprint(books_blueprint, url_prefix="/books")
