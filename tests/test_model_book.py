@@ -1,5 +1,5 @@
-from bookstore.models import Book
-from bookstore import db
+from books.models import Book
+from books import db
 
 def test_book():
     newbook = Book("Peril")
