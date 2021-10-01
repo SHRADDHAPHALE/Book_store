@@ -13,7 +13,6 @@ lazy-object-proxy==1.6.0
 Mako==1.0.7
 MarkupSafe==1.0
 mccabe==0.6.1
-pkg_resources==0.0.0
 platformdirs==2.4.0
 pylint==2.11.1
 python-dateutil==2.7.2
