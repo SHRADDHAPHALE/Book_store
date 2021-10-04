@@ -16,19 +16,22 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
-          </li>
+        <ul class="nav">
+
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('add') }}">Add a donated book</a>
+            <a class="nav-link" href="{{ url_for('index') }}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('list') }}">List of Books</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('delete') }}">Buy the Book</a>
-          </li>
+            {% if current_user.is_authenticated %}
+            <li class="nav-link"><a href="{{ url_for('logout') }}">Log Out</a></li>
+            <li class="nav-link"><a href="{{ url_for('add') }}"></a>Donate a book</li>
+            <li class="nav-link"><a href="{{ url_for('list') }}"></a>List all the books</li>
+            <li class="nav-link"><a href="{{ url_for('delete') }}"></a>Buy a bbok</li>
+
+            {% else %}
+            <li class="nav-link"><a href="{{ url_for('login') }}">Log In</a></li>
+            <li class="nav-link"><a href="{{ url_for('register') }}">Register</a></li>
+            {% endif %}
+        
         </ul>
       </div>
     </nav>
