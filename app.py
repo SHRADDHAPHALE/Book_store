@@ -53,12 +53,12 @@ def register():
 
         db.session.add(user)
         db.session.commit()
+        
         flash('Successfully registered ! Now you can login!')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
 @app.route("/add", methods=["GET", "POST"])
-@login_required
 def add():
     form = AddForm()
 
@@ -75,14 +75,12 @@ def add():
 
 
 @app.route("/list")
-@login_required
 def list():
     books = Book.query.all()
     return render_template("list.html", books=books)
 
 
 @app.route("/delete", methods=["GET", "POST"])
-@login_required
 def delete():
 
     form = DelForm()
