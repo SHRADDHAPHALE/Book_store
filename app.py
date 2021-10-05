@@ -13,14 +13,14 @@ def index():
 @app.route('/welcome')
 @login_required
 def welcome_user():
-    return render_template('welcome_user.html')
+    return render_template('home.html')
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    flash('You logged out!')
-    return redirect(url_for('home'))
+    flash('You are logged out!')
+    return redirect(url_for('index'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -33,7 +33,7 @@ def login():
         if user.check_password(form.password.data) and user is not None:
 
             login_user(user)
-            flash('Logged In !')
+            flash('You are logged In !')
             next = request.args.get('next')
 
             if next == None or not next[0]=='/':
@@ -47,11 +47,11 @@ def register():
     form = RegistrationForm()
 
     if form.validate_on_submit():
-        user = User(email=form.email.data,
+        buyer = User(email=form.email.data,
                     username=form.username.data,
                     password=form.password.data)
 
-        db.session.add(user)
+        db.session.add(buyer)
         db.session.commit()
         
         flash('Successfully registered ! Now you can login!')
@@ -59,6 +59,7 @@ def register():
     return render_template('register.html', form=form)
 
 @app.route("/add", methods=["GET", "POST"])
+@login_required
 def add():
     form = AddForm()
 
@@ -75,12 +76,14 @@ def add():
 
 
 @app.route("/list")
+@login_required
 def list():
     books = Book.query.all()
     return render_template("list.html", books=books)
 
 
 @app.route("/delete", methods=["GET", "POST"])
+@login_required
 def delete():
 
     form = DelForm()
